@@ -1,10 +1,10 @@
 import type { Decision } from "@/data/types";
 import { signed } from "@/components/Money";
 
-const confidencePill = (c: Decision["confidence"]) =>
-  c === "high" ? "pill ok" : c === "medium" ? "pill warn" : "pill bad";
+const confidenceTag = (c: Decision["confidence"]) =>
+  c === "high" ? "tag ok" : c === "medium" ? "tag warn" : "tag bad";
 
-function EffectRow({ decision }: { decision: Decision }) {
+function Effect({ decision }: { decision: Decision }) {
   const e = decision.statementEffect;
   if (!e) return null;
   const cells: [string, number | null][] = [
@@ -16,11 +16,14 @@ function EffectRow({ decision }: { decision: Decision }) {
   ];
   return (
     <div className="dblock">
-      <div className="h">Statement effect versus the rejected alternative</div>
+      <div className="h">Statement effect against the rejected alternative</div>
       <div className="chips">
         {cells.map(([k, v]) => (
-          <span key={k} className="chip">
-            {k} {v === null ? "n/a" : signed(v)}
+          <span
+            key={k}
+            className={`chip ${v === null || v === 0 ? "" : v > 0 ? "up" : "down"}`}
+          >
+            <span className="k">{k}</span> {v === null ? "n/a" : signed(v)}
           </span>
         ))}
       </div>
@@ -35,35 +38,39 @@ export function DecisionCard({ decision, open = false }: { decision: Decision; o
       <summary>
         <span className="did">{decision.id}</span>
         <span className="dq">{decision.question}</span>
-        {isMaterial ? <span className="pill accent">material</span> : null}
-        {decision.changedFromAI ? <span className="pill warn">overrode AI</span> : null}
-        {decision.agentsDisagreed ? <span className="pill bad">agents differed</span> : null}
-        <span className={confidencePill(decision.confidence)}>{decision.confidence}</span>
+        {isMaterial ? <span className="tag solid">material</span> : null}
+        {decision.changedFromAI ? <span className="tag warn">overrode AI</span> : null}
+        {decision.agentsDisagreed ? <span className="tag bad">agents differed</span> : null}
+        <span className={confidenceTag(decision.confidence)}>{decision.confidence}</span>
       </summary>
       <div className="dbody">
         <div className="dblock final">
           <div className="h">Certified answer</div>
           <p>{decision.answer}</p>
         </div>
-        {isMaterial && decision.aiProposal ? (
-          <div className="dblock">
-            <div className="h">First AI proposal (Agent 1)</div>
-            <p>{decision.aiProposal}</p>
+
+        {isMaterial && decision.aiProposal && decision.independentChallenge ? (
+          <div className="trail">
+            <div>
+              <div className="h">Agent 1 · first proposal</div>
+              <p style={{ margin: 0, color: "var(--ink-2)" }}>{decision.aiProposal}</p>
+            </div>
+            <div>
+              <div className="h">Agent 2 · independent analysis</div>
+              <p style={{ margin: 0, color: "var(--ink-2)" }}>{decision.independentChallenge}</p>
+            </div>
           </div>
         ) : null}
-        {isMaterial && decision.independentChallenge ? (
-          <div className="dblock">
-            <div className="h">Independent second analysis (Agent 2)</div>
-            <p>{decision.independentChallenge}</p>
-          </div>
-        ) : null}
+
         {isMaterial && decision.studentReasoning ? (
           <div className="dblock final">
             <div className="h">My reasoning and certification</div>
             <p>{decision.studentReasoning}</p>
           </div>
         ) : null}
-        <EffectRow decision={decision} />
+
+        <Effect decision={decision} />
+
         <div className="dblock">
           <div className="h">Evidence</div>
           <div className="chips">

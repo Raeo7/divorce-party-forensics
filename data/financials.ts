@@ -173,6 +173,109 @@ export const schedules: Schedule[] = [
   },
 ];
 
+export interface BridgeStep {
+  label: string;
+  delta: number | null;
+  running: number;
+  kind: "anchor" | "negative" | "positive" | "subtotal" | "result";
+  why: string;
+}
+
+/** The walk from management's claim to the certified position. Drives the bridge chart. */
+export const profitBridge: BridgeStep[] = [
+  {
+    label: "Management profit as presented",
+    delta: null,
+    running: 312000,
+    kind: "anchor",
+    why: "Used in the takeover deck",
+  },
+  {
+    label: "September deposits removed from revenue",
+    delta: -90000,
+    running: 222000,
+    kind: "negative",
+    why: "Events on 15 and 24 September; nothing delivered by 31 August",
+  },
+  {
+    label: "Bank advance removed from income",
+    delta: -50000,
+    running: 172000,
+    kind: "negative",
+    why: "The agreement calls it a loan and requires repayment",
+  },
+  {
+    label: "Materials and wages understated",
+    delta: -24000,
+    running: 148000,
+    kind: "negative",
+    why: "620,000 stated against 644,000 reconstructed",
+  },
+  {
+    label: "Other operating costs overstated",
+    delta: 27000,
+    running: 175000,
+    kind: "positive",
+    why: "168,000 stated against 141,000 of actual cash overhead",
+  },
+  {
+    label: "Depreciation never booked",
+    delta: -24000,
+    running: 151000,
+    kind: "negative",
+    why: "Nil recorded on 260,000 of assets in use",
+  },
+  {
+    label: "Damaged stock not written down",
+    delta: -22000,
+    running: 129000,
+    kind: "negative",
+    why: "Water damage under a leaking pipe; independently assessed as unsaleable",
+  },
+  {
+    label: "Liquidated customer not impaired",
+    delta: -18000,
+    running: 111000,
+    kind: "negative",
+    why: "Liquidator confirms no distribution expected",
+  },
+  {
+    label: "Legal provision omitted",
+    delta: -25000,
+    running: 86000,
+    kind: "negative",
+    why: "Counsel wrote probable on the reporting date",
+  },
+  {
+    label: "Disposal obligation omitted",
+    delta: -2000,
+    running: 84000,
+    kind: "negative",
+    why: "Net realisable value of the damaged stock is negative",
+  },
+  {
+    label: "Corrected operating profit",
+    delta: null,
+    running: 84000,
+    kind: "subtotal",
+    why: "Before financing costs",
+  },
+  {
+    label: "Interest expense never recognised",
+    delta: -12000,
+    running: 72000,
+    kind: "negative",
+    why: "Loan schedule: 10,000 paid, 2,000 accrued",
+  },
+  {
+    label: "Certified net profit",
+    delta: null,
+    running: 72000,
+    kind: "result",
+    why: "Every line traced to evidence outside the company",
+  },
+];
+
 export const profitAndLoss: StatementLine[] = [
   { label: "Revenue", value: 960000 },
   { label: "Cost of materials", value: -396000 },

@@ -1,13 +1,21 @@
 import Link from "next/link";
 import { decisions, materialJudgments } from "@/data/decisions";
 import { agentDisagreements } from "@/data/agents";
-import { balanceSheet, boardRecommendation, profitAndLoss, reconciliations, uncertainties } from "@/data/financials";
+import {
+  balanceSheet,
+  boardRecommendation,
+  profitAndLoss,
+  reconciliations,
+  uncertainties,
+} from "@/data/financials";
 import { DecisionCard } from "@/components/DecisionCard";
+import { RangeBar } from "@/components/RangeBar";
 import { fmt, signed } from "@/components/Money";
 
 export const metadata = {
-  title: "DPI-HT-01 Assessor Review",
-  description: "Compact assessor view: disagreements, overrides, low-confidence decisions and unresolved uncertainty.",
+  title: "DPI-HT-01 · Assessor Review",
+  description:
+    "Compact assessor view: agent disagreements, student overrides, low-confidence decisions and unresolved uncertainty.",
 };
 
 export default function Review() {
@@ -28,71 +36,86 @@ export default function Review() {
 
   return (
     <>
-      <nav className="nav">
-        <div className="nav-inner">
-          <strong>DPI-HT-01 &middot; assessor view</strong>
-          <a href="#status">Status</a>
-          <a href="#flags">Flags</a>
-          <a href="#checks">Checks</a>
-          <a href="#open">Unresolved</a>
-          <a href="#material">25 material</a>
-          <Link href="/">Full report</Link>
-          <a href="/submission.json">/submission.json</a>
+      <div className="topbar">
+        <div className="topbar-inner">
+          <Link href="/" className="brand">
+            DPI-HT-01 · assessor
+          </Link>
+          <nav className="topnav">
+            <a href="#flags">Flags</a>
+            <a href="#checks">Checks</a>
+            <a href="#open">Unresolved</a>
+            <a href="#records">Records</a>
+            <Link href="/" className="cta">
+              Full report
+            </Link>
+            <a href="/submission.json" className="cta">
+              JSON
+            </a>
+          </nav>
         </div>
-      </nav>
+      </div>
 
       <header className="hero">
         <div className="wrap">
-          <p className="eyebrow">Compact assessor view</p>
-          <h1>Review summary</h1>
+          <span className="stamp">Compact assessor view</span>
+          <h1>Everything to check, on one screen.</h1>
           <p className="lede">
-            Everything an assessor needs to check in one screen: whether the statements reconcile, where the two
-            independent analyses disagreed, where I overrode the AI, which decisions carry less than full confidence and
-            what remains unresolved.
+            Whether the statements reconcile, where the two independent analyses disagreed, where I
+            overrode the AI, which decisions carry less than full confidence, and what remains
+            unresolved.
           </p>
-          <div className="kpis" id="status">
-            <div className="kpi">
-              <div className="label">Decisions</div>
-              <div className="value">{decisions.length} / 100</div>
-              <div className="sub">
-                {materialJudgments.length} material, {decisions.length - materialJudgments.length} operational
+
+          <div className="ledger">
+            <div className="ledger-cell">
+              <div className="k">Decisions</div>
+              <div className="v">{decisions.length} / 100</div>
+              <div className="s">
+                {materialJudgments.length} material, {decisions.length - materialJudgments.length}{" "}
+                operational
               </div>
             </div>
-            <div className="kpi">
-              <div className="label">Reconciliations</div>
-              <div className="value">
+            <div className="ledger-cell">
+              <div className="k">Reconciliations</div>
+              <div className="v">
                 {reconciliations.filter((r) => r.passes).length} / {reconciliations.length}
               </div>
-              <div className="sub">{allPass ? "all pass" : "failures present"}</div>
+              <div className="s">{allPass ? "all pass" : "failures present"}</div>
             </div>
-            <div className="kpi">
-              <div className="label">Net profit</div>
-              <div className="value">{fmt(netProfit)}</div>
-              <div className="sub">claimed {fmt(boardRecommendation.claimedProfit)}</div>
+            <div className="ledger-cell">
+              <div className="k">Net profit</div>
+              <div className="v">{fmt(netProfit)}</div>
+              <div className="s">claimed {fmt(boardRecommendation.claimedProfit)}</div>
             </div>
-            <div className="kpi">
-              <div className="label">Balance sheet</div>
-              <div className="value">{fmt(totalAssets)}</div>
-              <div className="sub">assets = liabilities + equity</div>
+            <div className="ledger-cell">
+              <div className="k">Balance sheet</div>
+              <div className="v">{fmt(totalAssets)}</div>
+              <div className="s">assets = liabilities + equity</div>
             </div>
           </div>
         </div>
       </header>
 
-      <section id="flags">
+      <section>
         <div className="wrap">
-          <h2>Flags</h2>
-          <p className="section-note">
-            The four categories the assignment asks to be highlighted. Every flagged item links to the full decision
-            record.
-          </p>
+          <div className="sec-head" id="flags">
+            <div className="sec-num">01</div>
+            <h2>Flags</h2>
+            <p className="sec-note">
+              The four categories the assignment asks to be highlighted. Every flagged item links to
+              its full record below.
+            </p>
+          </div>
 
           <div className="card">
-            <h3>Agent disagreements &middot; {agentDisagreements.length}</h3>
-            <p className="note" style={{ marginBottom: 10 }}>
-              All three are presentation differences. The two independent analyses agreed on every certified number in
-              the statements, including net profit of 72,000, total assets of 540,000 and the derived opening equity of
-              170,000.
+            <div className="card-head">
+              <h3 style={{ margin: 0, flex: "1 1 auto" }}>Agent disagreements</h3>
+              <span className="tag">{agentDisagreements.length}</span>
+            </div>
+            <p className="note" style={{ marginBottom: 14 }}>
+              All three are presentation differences. The two independent analyses agreed on every
+              certified number in the statements, including net profit of 72,000, total assets of
+              540,000 and the derived opening equity of 170,000.
             </p>
             <div className="tbl-scroll">
               <table>
@@ -111,7 +134,7 @@ export default function Review() {
                       <td>{d.topic}</td>
                       <td>{d.resolution}</td>
                       <td>
-                        <span className="pill ok">none</span>
+                        <span className="tag ok">none</span>
                       </td>
                     </tr>
                   ))}
@@ -121,7 +144,10 @@ export default function Review() {
           </div>
 
           <div className="card">
-            <h3>Student overrides of the AI answer &middot; {overrides.length}</h3>
+            <div className="card-head">
+              <h3 style={{ margin: 0, flex: "1 1 auto" }}>Student overrides of the AI answer</h3>
+              <span className="tag warn">{overrides.length}</span>
+            </div>
             <div className="tbl-scroll">
               <table>
                 <thead>
@@ -130,7 +156,7 @@ export default function Review() {
                     <th>Question</th>
                     <th>First AI proposal</th>
                     <th>Certified instead</th>
-                    <th className="num">Profit effect</th>
+                    <th className="num">Profit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -142,7 +168,7 @@ export default function Review() {
                         </a>
                       </td>
                       <td>{d.question}</td>
-                      <td>{d.aiProposal}</td>
+                      <td style={{ color: "var(--ink-3)" }}>{d.aiProposal}</td>
                       <td>{d.answer}</td>
                       <td className="num">
                         {d.statementEffect?.profit === null || d.statementEffect?.profit === undefined
@@ -157,9 +183,11 @@ export default function Review() {
           </div>
 
           <div className="card">
-            <h3>
-              Decisions below full confidence &middot; {medConf.length} medium, {lowConf.length} low
-            </h3>
+            <div className="card-head">
+              <h3 style={{ margin: 0, flex: "1 1 auto" }}>Decisions below full confidence</h3>
+              <span className="tag warn">{medConf.length} medium</span>
+              <span className={lowConf.length > 0 ? "tag bad" : "tag"}>{lowConf.length} low</span>
+            </div>
             <div className="tbl-scroll">
               <table>
                 <thead>
@@ -182,17 +210,17 @@ export default function Review() {
                       <td>{d.question}</td>
                       <td>
                         {d.reviewTier === "material_judgment" ? (
-                          <span className="pill accent">material</span>
+                          <span className="tag solid">material</span>
                         ) : (
-                          <span className="pill">operational</span>
+                          <span className="tag">operational</span>
                         )}
                       </td>
                       <td>
-                        <span className={d.confidence === "low" ? "pill bad" : "pill warn"}>{d.confidence}</span>
+                        <span className={d.confidence === "low" ? "tag bad" : "tag warn"}>
+                          {d.confidence}
+                        </span>
                       </td>
-                      <td className="note" style={{ display: "table-cell" }}>
-                        {shortWhy(d.id)}
-                      </td>
+                      <td style={{ color: "var(--ink-3)", fontSize: 14 }}>{shortWhy(d.id)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -202,92 +230,76 @@ export default function Review() {
         </div>
       </section>
 
-      <section id="checks">
+      <section>
         <div className="wrap">
-          <h2>Required financial checks</h2>
-          <div className="card">
-            <div className="tbl-scroll">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Check</th>
-                    <th className="num">Left</th>
-                    <th className="num">Right</th>
-                    <th className="num">Diff</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {reconciliations.map((r) => (
-                    <tr key={r.id}>
-                      <td>
-                        <span className="did">{r.id}</span> {r.check}
-                      </td>
-                      <td className="num">{fmt(r.leftValue)}</td>
-                      <td className="num">{fmt(r.rightValue)}</td>
-                      <td className="num">{fmt(r.leftValue - r.rightValue)}</td>
-                      <td>
-                        <span className={r.passes ? "pill ok" : "pill bad"}>{r.passes ? "pass" : "fail"}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          <div className="sec-head" id="checks">
+            <div className="sec-num">02</div>
+            <h2>Required financial checks</h2>
+          </div>
+          <div className="checks">
+            {reconciliations.map((r) => (
+              <div className="check" key={r.id}>
+                <div className="id">{r.id}</div>
+                <div className="name">{r.check}</div>
+                <div className="vals">
+                  <span>{fmt(r.leftValue)}</span>
+                  <span className="eq">=</span>
+                  <span>{fmt(r.rightValue)}</span>
+                  <span className={r.passes ? "tag ok" : "tag bad"} style={{ marginLeft: "auto" }}>
+                    {r.passes ? "pass" : "fail"}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="open">
+      <section>
         <div className="wrap">
-          <h2>Unresolved uncertainty</h2>
-          <div className="card">
-            <div className="tbl-scroll">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Topic</th>
-                    <th className="num">Low</th>
-                    <th className="num">Best</th>
-                    <th className="num">High</th>
-                    <th className="num">Profit swing</th>
-                    <th>Decisions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {uncertainties.map((u) => (
-                    <tr key={u.id}>
-                      <td className="did">{u.id}</td>
-                      <td>{u.topic}</td>
-                      <td className="num">{fmt(u.low)}</td>
-                      <td className="num">{fmt(u.best)}</td>
-                      <td className="num">{fmt(u.high)}</td>
-                      <td className="num">
-                        {signed(u.profitEffectLow)} / {signed(u.profitEffectHigh)}
-                      </td>
-                      <td className="mono" style={{ fontSize: 12 }}>
-                        {u.relatedDecisions.join(" ")}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="note" style={{ marginTop: 10 }}>
-              Combined, these bound certified net profit between roughly 58,000 and 86,000 against a claimed 312,000.
+          <div className="sec-head" id="open">
+            <div className="sec-num">03</div>
+            <h2>Unresolved uncertainty</h2>
+            <p className="sec-note">
+              Combined, these bound certified net profit between roughly 58,000 and 86,000 against a
+              claimed 312,000.
             </p>
           </div>
+          {uncertainties.map((u) => (
+            <div className="card" key={u.id}>
+              <div className="card-head">
+                <span className="did">{u.id}</span>
+                <h3 style={{ margin: 0, flex: "1 1 240px" }}>{u.topic}</h3>
+                <span className="chip down">
+                  profit {signed(u.profitEffectLow)} / {signed(u.profitEffectHigh)}
+                </span>
+              </div>
+              <RangeBar low={u.low} best={u.best} high={u.high} />
+              <div className="chips" style={{ marginTop: 14 }}>
+                <span className="chip">
+                  <span className="k">Resolved by</span> {u.resolvedBy}
+                </span>
+                {u.relatedDecisions.map((r) => (
+                  <a className="chip" key={r} href={`#${r}`}>
+                    {r}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section id="material">
+      <section>
         <div className="wrap">
-          <h2>Flagged decision records</h2>
-          <p className="section-note">
-            The {flaggedDecisions.length} decisions carrying an override, a disagreement or less than full confidence,
-            in full.
-          </p>
+          <div className="sec-head" id="records">
+            <div className="sec-num">04</div>
+            <h2>Flagged decision records</h2>
+            <p className="sec-note">
+              The {flaggedDecisions.length} decisions carrying an override, a disagreement or less
+              than full confidence, in full.
+            </p>
+          </div>
           {flaggedDecisions.map((d) => (
             <DecisionCard key={d.id} decision={d} />
           ))}
