@@ -12,6 +12,7 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
