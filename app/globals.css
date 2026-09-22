@@ -698,39 +698,20 @@ tbody tr:last-child td {
 }
 
 /* ----------------------------------------------------------------- decisions */
-details.decision {
+.decision {
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--paper);
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   overflow: hidden;
-  transition: border-color 0.15s ease;
 }
 
-details.decision:hover {
-  border-color: var(--ink-4);
-}
-
-details.decision[open] {
-  border-color: var(--ink-4);
-  box-shadow: var(--shadow);
-}
-
-details.decision > summary {
-  cursor: pointer;
-  padding: 12px 18px;
+.dhead {
+  padding: 13px 18px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: baseline;
-  list-style: none;
   flex-wrap: wrap;
-}
-
-details.decision > summary::-webkit-details-marker {
-  display: none;
-}
-
-details.decision[open] > summary {
   border-bottom: 1px solid var(--rule-soft);
   background: var(--paper-2);
 }
@@ -744,14 +725,17 @@ details.decision[open] > summary {
   flex: none;
 }
 
-.dq {
+h4.dq {
   flex: 1 1 250px;
-  font-size: 15.5px;
-  line-height: 1.4;
+  font-family: var(--font-prose-stack);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
 }
 
 .dbody {
-  padding: 18px;
+  padding: 16px 18px 18px;
 }
 
 .dblock {
@@ -802,6 +786,11 @@ details.decision[open] > summary {
 .trail > div {
   background: var(--paper-2);
   padding: 14px 16px;
+}
+
+.trail > div p {
+  margin: 0;
+  color: var(--ink-2);
 }
 
 .chips {
@@ -1117,13 +1106,45 @@ footer a {
   .browser-bar {
     top: 51px;
   }
-  details.decision > summary {
+  .dhead {
     padding: 11px 14px;
   }
   .dbody {
-    padding: 15px 14px;
+    padding: 14px;
   }
   .dblock.final {
     padding-left: 12px;
   }
+}
+
+/* ------------------------------------------------------- assessor orientation */
+.orientation {
+  margin-top: 30px;
+  padding: 20px 24px;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--verified);
+  border-radius: 0 3px 3px 0;
+  background: var(--paper);
+}
+
+.orientation .h {
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.orientation p {
+  margin: 0 0 12px;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+.orientation strong {
+  font-family: var(--font-mono-stack);
+  font-size: 13.5px;
+  color: var(--ink);
 }

@@ -301,7 +301,7 @@ export default function Review() {
             </p>
           </div>
           {flaggedDecisions.map((d) => (
-            <DecisionCard key={d.id} decision={d} />
+            <DecisionCard key={d.id} decision={d} full />
           ))}
         </div>
       </section>

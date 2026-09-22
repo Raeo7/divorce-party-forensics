@@ -22,6 +22,7 @@ import { DecisionBrowser } from "@/components/DecisionBrowser";
 import { Bridge } from "@/components/Bridge";
 import { RangeBar } from "@/components/RangeBar";
 import { Money, fmt, signed } from "@/components/Money";
+import { student } from "@/data/submission";
 
 const sections = [
   ["bridge", "01", "The bridge"],
@@ -85,7 +86,8 @@ export default function Home() {
         <div className="wrap">
           <span className="stamp">Takeover data room · reconstructed</span>
           <p className="hero-meta">
-            Divorce Party International Ltd. · {reportingDate} · {currency}
+            Case DPI-HT-01 · submitted by {student.name}, student {student.id} · Divorce Party
+            International Ltd. · {reportingDate} · {currency}
           </p>
           <h1>
             The accounts said <span className="struck">312,000</span>. The bank said{" "}
@@ -129,6 +131,30 @@ export default function Home() {
                 the AI
               </div>
             </div>
+          </div>
+
+          <div className="orientation">
+            <div className="h">How to assess this submission</div>
+            <p>
+              This page carries the whole reconstruction in full: the evidence register, seven
+              supporting schedules, all three statements, eight reconciliations, the two-agent
+              review trail for every material judgment, all 100 certified decisions, the uncertainty
+              register and the board recommendation. Nothing is hidden behind a control that has to
+              be clicked.
+            </p>
+            <ul className="clean">
+              <li>
+                <strong>/</strong> — this page, the complete report.
+              </li>
+              <li>
+                <strong>/review</strong> — compact assessor view: agent disagreements, student
+                overrides, decisions below full confidence, unresolved uncertainty.
+              </li>
+              <li>
+                <strong>/submission.json</strong> — the machine-readable answer, all 100 decision
+                IDs, valid against the supplied submission schema.
+              </li>
+            </ul>
           </div>
         </div>
       </header>
@@ -357,14 +383,14 @@ export default function Home() {
             ))}
           </div>
           {reconciliations.map((r) => (
-            <details className="decision" key={r.id} id={r.id}>
-              <summary>
+            <article className="decision" key={r.id} id={r.id}>
+              <header className="dhead">
                 <span className="did">{r.id}</span>
-                <span className="dq">{r.check}</span>
+                <h4 className="dq">{r.check}</h4>
                 <span className={r.passes ? "tag ok" : "tag bad"}>
-                  diff {fmt(r.leftValue - r.rightValue)}
+                  difference {fmt(r.leftValue - r.rightValue)}
                 </span>
-              </summary>
+              </header>
               <div className="dbody">
                 <div className="tbl-scroll">
                   <table className="narrow">
@@ -388,7 +414,7 @@ export default function Home() {
                   {r.detail}
                 </p>
               </div>
-            </details>
+            </article>
           ))}
         </div>
       </section>
@@ -479,7 +505,7 @@ export default function Home() {
             {overrides.length}: {overrides.map((o) => o.id).join(", ")}.
           </p>
           {materialJudgments.map((d) => (
-            <DecisionCard key={`trail-${d.id}`} decision={d} />
+            <DecisionCard key={d.id} decision={d} full />
           ))}
         </div>
       </section>

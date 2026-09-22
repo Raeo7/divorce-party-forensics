@@ -146,7 +146,7 @@ export function DecisionBrowser({ decisions }: { decisions: Decision[] }) {
       {shown.length === 0 ? (
         <p className="empty">Nothing matches that filter.</p>
       ) : (
-        shown.map((d) => <DecisionCard key={d.id} decision={d} />)
+        shown.map((d) => <DecisionCard key={d.id} decision={d} idPrefix="browse-" />)
       )}
     </div>
   );

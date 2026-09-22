@@ -14,7 +14,7 @@ import {
 } from "@/data/financials";
 
 export const student = {
-  id: "DPI-HT-01",
+  id: "220592",
   name: "Sebastjans Peive",
 };
 
