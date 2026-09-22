@@ -1354,7 +1354,15 @@ export const decisions: Decision[] = [
       "EUR 72,000. Revenue 960,000 less cost of sales 476,000 gives gross profit of 484,000; less operating expenses of " +
       "400,000 gives operating profit of 84,000; less interest of 12,000 gives 72,000. Management claimed 312,000, an " +
       "overstatement of 240,000.",
-    evidence: ["E01:Management profit 312,000", "All schedules S1-S7"],
+    evidence: [
+      "E02:complete bank export",
+      "E04:signed acceptances",
+      "E06:third-party invoices",
+      "E07:payroll totals",
+      "E11:post-takeover confirmations",
+      "E01:Management profit 312,000",
+      "Derived: schedules S1-S7",
+    ],
     confidence: "medium",
   },
   {
@@ -1379,7 +1387,14 @@ export const decisions: Decision[] = [
       "Approve. The corrected accounts are the only version that reconciles to the bank, to confirmed supplier and " +
       "loan balances and to the physical stock count. No valuation, earn-out or refinancing discussion should proceed " +
       "on the management figures.",
-    evidence: ["R1-R8 reconciliations", "E11:Bank confirmation", "E06:confirmed supplier balances", "E01:Management workbook"],
+    evidence: [
+      "E11:Bank confirmation",
+      "E06:confirmed supplier balances",
+      "E05:physical count",
+      "E09:counsel opinion",
+      "E01:Management workbook",
+      "Derived: reconciliations R1-R8",
+    ],
     confidence: "high",
     aiProposal:
       "Approve the corrected accounts. They reconcile on all seven required checks, whereas the management workbook " +
@@ -1498,7 +1513,13 @@ export const decisions: Decision[] = [
       "actually deliver the events, and operating cash flow was positive at EUR 139,000. The company did not lose money " +
       "on what it sold; it lost 240,000 of reported profit to bad accounting and 110,000 of cash to the founder. Both " +
       "are fixable and neither is a trading problem.",
-    evidence: ["S1 revenue schedule", "E04:signed acceptances", "Cash flow statement"],
+    evidence: [
+      "E04:signed acceptances",
+      "E03:CRM delivered rows",
+      "E02:Stripe settlements and customer receipts",
+      "Derived: revenue schedule S1",
+      "Derived: cash flow statement",
+    ],
     confidence: "high",
   },
   {
@@ -1509,7 +1530,11 @@ export const decisions: Decision[] = [
     answer:
       "No. Do not use the claimed EUR 312,000 for any earn-out, valuation or covenant calculation. The certified basis " +
       "is EUR 72,000.",
-    evidence: ["E01:Management profit 312,000 'Used in takeover deck'", "E10:08:04-08:07", "All reconciliations R1-R8"],
+    evidence: [
+      "E01:Management profit 312,000 'Used in takeover deck'",
+      "E10:08:04-08:07",
+      "Derived: reconciliations R1-R8",
+    ],
     confidence: "high",
     aiProposal:
       "Reject the 312,000. It includes 90,000 of undelivered deposits and 50,000 of borrowing as income and omits " +
