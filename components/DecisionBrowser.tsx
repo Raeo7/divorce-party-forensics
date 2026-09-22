@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { Decision } from "@/data/types";
 import { DecisionCard } from "@/components/DecisionCard";
 
@@ -20,6 +20,15 @@ export function DecisionBrowser({ decisions }: { decisions: Decision[] }) {
   const [tier, setTier] = useState<TierFilter>("all");
   const [category, setCategory] = useState<string>("all");
   const [flag, setFlag] = useState<FlagFilter>("all");
+
+  /* Records ship open so the text is readable; a person can fold them to scan. */
+  const setAllOpen = useCallback((open: boolean) => {
+    document
+      .querySelectorAll<HTMLDetailsElement>("#decision-list details.decision")
+      .forEach((d) => {
+        d.open = open;
+      });
+  }, []);
 
   const counts = useMemo(
     () => ({
@@ -137,17 +146,26 @@ export function DecisionBrowser({ decisions }: { decisions: Decision[] }) {
             Below high confidence<span className="n">{counts.notHigh}</span>
           </button>
 
-          <span className="result-count">
-            {shown.length} shown
-          </span>
+          <span className="filter-sep" />
+
+          <button className="fbtn" type="button" onClick={() => setAllOpen(false)}>
+            Fold all
+          </button>
+          <button className="fbtn" type="button" onClick={() => setAllOpen(true)}>
+            Unfold all
+          </button>
+
+          <span className="result-count">{shown.length} shown</span>
         </div>
       </div>
 
-      {shown.length === 0 ? (
-        <p className="empty">Nothing matches that filter.</p>
-      ) : (
-        shown.map((d) => <DecisionCard key={d.id} decision={d} idPrefix="browse-" />)
-      )}
+      <div id="decision-list">
+        {shown.length === 0 ? (
+          <p className="empty">Nothing matches that filter.</p>
+        ) : (
+          shown.map((d) => <DecisionCard key={d.id} decision={d} idPrefix="browse-" />)
+        )}
+      </div>
     </div>
   );
 }

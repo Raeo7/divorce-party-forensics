@@ -698,22 +698,55 @@ tbody tr:last-child td {
 }
 
 /* ----------------------------------------------------------------- decisions */
-.decision {
+details.decision {
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: var(--paper);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   overflow: hidden;
+  transition: border-color 0.15s ease;
 }
 
-.dhead {
-  padding: 13px 18px;
+details.decision:hover {
+  border-color: var(--ink-4);
+}
+
+summary.dhead {
+  padding: 12px 18px 12px 34px;
+  position: relative;
   display: flex;
   gap: 10px;
   align-items: baseline;
   flex-wrap: wrap;
-  border-bottom: 1px solid var(--rule-soft);
+  cursor: pointer;
+  list-style: none;
   background: var(--paper-2);
+}
+
+summary.dhead::-webkit-details-marker {
+  display: none;
+}
+
+/* Fold indicator: a caret that rotates with the open state. */
+summary.dhead::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 1.15em;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--ink-4);
+  border-bottom: 1.5px solid var(--ink-4);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+details.decision[open] > summary.dhead::before {
+  transform: rotate(45deg);
+}
+
+details.decision[open] > summary.dhead {
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 .did {
@@ -1106,8 +1139,11 @@ footer a {
   .browser-bar {
     top: 51px;
   }
-  .dhead {
-    padding: 11px 14px;
+  summary.dhead {
+    padding: 11px 14px 11px 30px;
+  }
+  summary.dhead::before {
+    left: 13px;
   }
   .dbody {
     padding: 14px;

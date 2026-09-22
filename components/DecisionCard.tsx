@@ -29,9 +29,9 @@ function Effect({ decision }: { decision: Decision }) {
 }
 
 /**
- * Every decision renders its full certified content in the page text.
- * Nothing is hidden behind a disclosure control: collapsed content is absent
- * from innerText, so an automated reader would not see the work at all.
+ * Records open by default. A closed <details> is absent from the rendered text,
+ * so an automated reader would not see the work at all; open, it is both
+ * readable and still collapsible by a person who wants to scan the list.
  *
  * `full` adds the two AI positions, the certification reasoning and the
  * statement effect. Those render once, in the AI review trail, which owns the
@@ -48,15 +48,15 @@ export function DecisionCard({
 }) {
   const isMaterial = decision.reviewTier === "material_judgment";
   return (
-    <article className="decision" id={`${idPrefix}${decision.id}`}>
-      <header className="dhead">
+    <details className="decision" id={`${idPrefix}${decision.id}`} open>
+      <summary className="dhead">
         <span className="did">{decision.id}</span>
         <h4 className="dq">{decision.question}</h4>
         {isMaterial ? <span className="tag solid">material judgment</span> : null}
         {decision.changedFromAI ? <span className="tag warn">overrode AI</span> : null}
         {decision.agentsDisagreed ? <span className="tag bad">agents differed</span> : null}
         <span className={confidenceTag(decision.confidence)}>{decision.confidence} confidence</span>
-      </header>
+      </summary>
 
       <div className="dbody">
         <div className="dblock final">
@@ -102,6 +102,6 @@ export function DecisionCard({
           </div>
         </div>
       </div>
-    </article>
+    </details>
   );
 }
