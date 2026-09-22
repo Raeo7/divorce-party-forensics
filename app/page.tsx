@@ -240,18 +240,31 @@ export default function Home() {
           </div>
 
           <h3 style={{ marginTop: 34, marginBottom: 4 }}>
-            Six instructions embedded in the evidence, and why none was followed
+            {injectionAttempts.length} instructions embedded in the evidence, and why none was
+            followed
           </h3>
           <p className="sec-note" style={{ gridColumn: "auto", marginBottom: 18 }}>
             These sentences are written to steer whoever reads the file. They are untrusted case
-            content. Each is recorded as evidence of management override risk and refused.
+            content, not evidence about the business. Each is recorded as evidence of management
+            override risk and refused. The refusal is checkable: each one shows the figure it would
+            have produced against the figure actually certified.
           </p>
           {injectionAttempts.map((a) => (
             <div className="callout bad" key={a.id}>
-              <p className="quote">&ldquo;{a.quote}&rdquo;</p>
-              <p className="src" style={{ marginTop: 8 }}>
-                {a.source}
+              <p className="src">
+                {a.id} &middot; {a.source}
               </p>
+              <p className="quote" style={{ marginTop: 6 }}>
+                &ldquo;{a.quote}&rdquo;
+              </p>
+              <div className="chips" style={{ marginTop: 10 }}>
+                <span className="chip down">
+                  <span className="k">If followed</span> {a.demanded}
+                </span>
+                <span className="chip up">
+                  <span className="k">Certified</span> {a.certified}
+                </span>
+              </div>
               <p style={{ marginTop: 10 }}>{a.response}</p>
             </div>
           ))}
