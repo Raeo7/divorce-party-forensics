@@ -111,15 +111,14 @@ export const schedules: Schedule[] = [
       { label: "Depreciation", value: 24000 },
       { label: "Bad debt write-off", value: 18000 },
       { label: "Damaged inventory write-off", value: 22000 },
-      { label: "Disposal provision", value: 2000 },
       { label: "Legal provision", value: 25000 },
       { label: "Sales and partnerships payroll", value: 72000 },
       { label: "Office and finance payroll", value: 96000 },
-      { label: "Total operating expenses", value: 400000, emphasis: true },
+      { label: "Total operating expenses", value: 398000, emphasis: true },
       { label: "Insurance", value: 0, note: "No insurance payment appears in the bank export or any schedule" },
     ],
     proof:
-      "The five cash overhead lines (48 + 55 + 16 + 12 + 10 = 141,000) agree line for line with the bank export. The remaining 259,000 are non-cash charges and accruals supported by the independent depreciation schedule, the liquidator notice, the stock assessment and counsel's opinion.",
+      "The five cash overhead lines (48 + 55 + 16 + 12 + 10 = 141,000) agree line for line with the bank export. The remaining 257,000 are non-cash charges and accruals supported by the independent depreciation schedule, the liquidator notice, the stock assessment and counsel's opinion. No disposal provision is included - see D072.",
   },
   {
     id: "S5",
@@ -163,13 +162,13 @@ export const schedules: Schedule[] = [
     title: "Equity and distributions",
     lines: [
       { label: "Opening equity", value: 170000, note: "Derived: opening assets 330,000 less liabilities 160,000" },
-      { label: "Net profit for the period", value: 72000 },
+      { label: "Net profit for the period", value: 74000 },
       { label: "Owner villa reservation", value: -70000, note: "Personal name, no customer meeting" },
       { label: "Other owner card spending", value: -40000, note: "No business purpose evidenced" },
-      { label: "Closing equity", value: 132000, emphasis: true },
+      { label: "Closing equity", value: 134000, emphasis: true },
     ],
     proof:
-      "170,000 + 72,000 - 110,000 = 132,000, which equals total assets 540,000 less total liabilities 408,000 computed independently.",
+      "170,000 + 74,000 - 110,000 = 134,000, which equals total assets 540,000 less total liabilities 406,000 computed independently.",
   },
 ];
 
@@ -247,30 +246,23 @@ export const profitBridge: BridgeStep[] = [
     why: "Counsel wrote probable on the reporting date",
   },
   {
-    label: "Disposal obligation omitted",
-    delta: -2000,
-    running: 84000,
-    kind: "negative",
-    why: "Net realisable value of the damaged stock is negative",
-  },
-  {
     label: "Corrected operating profit",
     delta: null,
-    running: 84000,
+    running: 86000,
     kind: "subtotal",
     why: "Before financing costs",
   },
   {
     label: "Interest expense never recognised",
     delta: -12000,
-    running: 72000,
+    running: 74000,
     kind: "negative",
     why: "Loan schedule: 10,000 paid, 2,000 accrued",
   },
   {
     label: "Certified net profit",
     delta: null,
-    running: 72000,
+    running: 74000,
     kind: "result",
     why: "Every line traced to evidence outside the company",
   },
@@ -291,15 +283,14 @@ export const profitAndLoss: StatementLine[] = [
   { label: "Depreciation", value: -24000 },
   { label: "Bad debt write-off", value: -18000 },
   { label: "Damaged inventory write-off", value: -22000 },
-  { label: "Disposal provision", value: -2000 },
   { label: "Legal provision", value: -25000 },
-  { label: "Operating profit", value: 84000, level: "subtotal" },
+  { label: "Operating profit", value: 86000, level: "subtotal" },
   { label: "Interest expense", value: -12000 },
-  { label: "Net profit for the period", value: 72000, level: "total" },
+  { label: "Net profit for the period", value: 74000, level: "total" },
 ];
 
 export const cashFlow: StatementLine[] = [
-  { label: "Net profit for the period", value: 72000 },
+  { label: "Net profit for the period", value: 74000 },
   { label: "Depreciation", value: 24000, note: "Non-cash" },
   { label: "Increase in trade receivables", value: -133000, note: "35,000 to 168,000 net of the write-off" },
   { label: "Increase in inventory", value: -41000, note: "80,000 to 121,000 net of the write-off" },
@@ -307,7 +298,7 @@ export const cashFlow: StatementLine[] = [
   { label: "Increase in accrued payroll", value: 17000 },
   { label: "Increase in interest payable", value: 2000 },
   { label: "Increase in contract liabilities", value: 90000, note: "The two September deposits" },
-  { label: "Increase in provisions", value: 27000, note: "Legal 25,000 and disposal 2,000" },
+  { label: "Increase in provisions", value: 25000, note: "The legal claim" },
   { label: "Net cash from operating activities", value: 139000, level: "subtotal" },
   { label: "Purchase of packaging machine", value: -60000 },
   { label: "Purchase of photo booth", value: -20000 },
@@ -344,12 +335,12 @@ export const balanceSheet: StatementLine[] = [
   { label: "Trade payables", value: 126000 },
   { label: "Accrued payroll", value: 32000 },
   { label: "Contract liabilities", value: 90000, note: "September events" },
-  { label: "Provisions", value: 27000, note: "Legal 25,000 and disposal 2,000" },
+  { label: "Provisions", value: 25000, note: "Legal claim; no disposal provision - see D072" },
   { label: "Interest payable", value: 2000 },
-  { label: "Current liabilities", value: 277000, level: "subtotal" },
+  { label: "Current liabilities", value: 275000, level: "subtotal" },
   { label: "Bank loan", value: 131000, note: "Shown non-current; no repayment schedule was supplied" },
-  { label: "Total liabilities", value: 408000, level: "subtotal" },
-  { label: "Equity", value: 132000, level: "subtotal" },
+  { label: "Total liabilities", value: 406000, level: "subtotal" },
+  { label: "Equity", value: 134000, level: "subtotal" },
   { label: "Total liabilities and equity", value: 540000, level: "total" },
 ];
 
@@ -421,10 +412,10 @@ export const reconciliations: Reconciliation[] = [
   {
     id: "R7",
     check: "Opening equity plus profit minus distributions equals closing equity",
-    left: "170,000 + 72,000 - 110,000",
-    leftValue: 132000,
+    left: "170,000 + 74,000 - 110,000",
+    leftValue: 134000,
     right: "Closing equity from the balance sheet",
-    rightValue: 132000,
+    rightValue: 134000,
     passes: true,
     detail:
       "Opening equity of 170,000 was derived independently from opening assets and liabilities, so this is a genuine cross-check rather than a restatement.",
@@ -504,18 +495,18 @@ export const uncertainties: Uncertainty[] = [
   },
   {
     id: "U5",
-    topic: "Disposal cost of the damaged stock",
+    topic: "Disposal cost of the damaged stock - provision or disclosure",
     description:
-      "The independent quote to remove the water-damaged stock is 2,000 and is not included in the 22,000 carrying value. Whether it is an obligation at 31 August or a September cost is a judgment.",
+      "The independent quote to remove the water-damaged stock is 2,000 and sits explicitly outside the 22,000 carrying value. The quote itself arrived on 3-5 September. No disposal contract existed at 31 August, no statute or lease term requiring clearance is evidenced, and there is no past practice or published policy that would create a constructive obligation.",
     basisChosen:
-      "Provided at 31 August. The damage occurred before the reporting date and the goods must be removed, so net realisable value is negative and the shortfall is a liability.",
+      "No provision. The 2,000 is disclosed as expected future expenditure. A negative net realisable value floors the inventory at nil under the measurement rule; it does not by itself create a liability. A liability needs a present legal or constructive obligation at the reporting date, and none is evidenced. Recognising one would repeat the error I avoided at D071, where I declined to book an allowance that had no basis.",
     low: 0,
-    best: 2000,
+    best: 0,
     high: 2000,
-    profitEffectLow: 2000,
-    profitEffectHigh: 0,
-    resolvedBy: "Place the disposal order and book the actual invoice.",
-    relatedDecisions: ["D058", "D072"],
+    profitEffectLow: 0,
+    profitEffectHigh: -2000,
+    resolvedBy: "Ask whether the warehouse lease or any regulation obliges clearance. If it does, a 2,000 provision is recognised at 31 August and certified profit falls from 74,000 to 72,000.",
+    relatedDecisions: ["D058", "D072", "D096"],
   },
   {
     id: "U6",
@@ -535,18 +526,18 @@ export const uncertainties: Uncertainty[] = [
 
 export const boardRecommendation = {
   headline: "The business is operationally viable. Its reported position was not.",
-  correctedProfit: 72000,
+  correctedProfit: 74000,
   claimedProfit: 312000,
-  profitOverstatement: 240000,
+  profitOverstatement: 238000,
   correctedCash: 60000,
   claimedCash: 186000,
   cashOverstatement: 126000,
   workingCapital: {
     currentAssets: 349000,
-    currentLiabilities: 277000,
-    netWorkingCapital: 72000,
+    currentLiabilities: 275000,
+    netWorkingCapital: 74000,
     note:
-      "Current assets of 349,000 (cash 60,000 + net receivables 168,000 + inventory 121,000) against current liabilities of 277,000, with the 131,000 loan shown as non-current. Liquidity is thin: 60,000 of cash against 126,000 owed to suppliers whose balances are already confirmed, and 90,000 of deposits for events that still have to be bought and delivered in September. No repayment schedule for the loan was supplied. If the whole 131,000 were in fact current, the 72,000 surplus becomes a deficit of 59,000, so obtaining that schedule is an urgent information request.",
+      "Current assets of 349,000 (cash 60,000 + net receivables 168,000 + inventory 121,000) against current liabilities of 275,000, with the 131,000 loan shown as non-current. Liquidity is thin: 60,000 of cash against 126,000 owed to suppliers whose balances are already confirmed, and 90,000 of deposits for events that still have to be bought and delivered in September. No repayment schedule for the loan was supplied. If the whole 131,000 were in fact current, the 74,000 surplus becomes a deficit of 57,000, so obtaining that schedule is an urgent information request.",
   },
   solvencyWarning:
     "The 90,000 of September deposits has already been spent. Those two events must be delivered out of a 60,000 cash balance while 126,000 of supplier debt and 32,000 of unpaid payroll fall due. The loan facility is drawn to 131,000 and 19,000 of principal was repaid this period without a schedule. A 13-week cash forecast is not optional.",
@@ -559,7 +550,7 @@ export const boardRecommendation = {
   ],
   continueCoreBusiness: true,
   continuationReasoning:
-    "Revenue of 960,000 is real: every euro of it is supported by a signed acceptance, a delivery date or a platform settlement. Gross margin is 484,000, or 50.4 per cent, and operating cash flow was positive at 139,000. The company did not lose money on what it sold. It lost 240,000 of reported profit to bad accounting and 110,000 of cash to the founder. Continue the Finally Single line and the event business, fix the controls, and treat the 312,000 profit claim as unusable for the earn-out.",
+    "Revenue of 960,000 is real: every euro of it is supported by a signed acceptance, a delivery date or a platform settlement. Gross margin is 484,000, or 50.4 per cent, and operating cash flow was positive at 139,000. The company did not lose money on what it sold. It lost 238,000 of reported profit to bad accounting and 110,000 of cash to the founder. Continue the Finally Single line and the event business, fix the controls, and treat the 312,000 profit claim as unusable for the earn-out.",
   earnOutPosition:
-    "Do not use the claimed management profit of 312,000 for any earn-out or valuation calculation. It includes 90,000 of undelivered deposits as sales, 50,000 of borrowing as income, and omits 24,000 of depreciation, 18,000 of bad debt, 22,000 of dead stock, 25,000 of legal provision and the reclassification of 110,000 of owner spending. Certified profit is 72,000.",
+    "Do not use the claimed management profit of 312,000 for any earn-out or valuation calculation. It includes 90,000 of undelivered deposits as sales, 50,000 of borrowing as income, and omits 24,000 of depreciation, 18,000 of bad debt, 22,000 of dead stock and a 25,000 legal provision. The owner's 110,000 moves the other way: reclassifying it out of expenses RAISES profit, so it offsets part of the gap rather than adding to it. Certified profit is 74,000.",
 };
