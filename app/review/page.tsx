@@ -114,7 +114,7 @@ export default function Review() {
             </div>
             <p className="note" style={{ marginBottom: 14 }}>
               All three are presentation differences. The two independent analyses agreed on every
-              certified number in the statements, including net profit of 72,000, total assets of
+              certified number in the statements, including net profit of 74,000, total assets of
               540,000 and the derived opening equity of 170,000.
             </p>
             <div className="tbl-scroll">

@@ -28,7 +28,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "DPI-HT-01 · Forensic Reconstruction",
   description:
-    "Case DPI-HT-01. Reconstructed Profit and Loss, Cash Flow and Balance Sheet for Divorce Party International Ltd. at 31 August 2026. Certified net profit 72,000 against a claimed 312,000. All 100 decisions certified, 25 material judgments with a two-agent review trail. Machine-readable answer at /submission.json.",
+    "Case DPI-HT-01. Reconstructed Profit and Loss, Cash Flow and Balance Sheet for Divorce Party International Ltd. at 31 August 2026. Certified net profit 74,000 against a claimed 312,000. All 100 decisions certified, 25 material judgments with a two-agent review trail. Machine-readable answer at /submission.json.",
   alternates: {
     types: { "application/json": "/submission.json" },
   },
