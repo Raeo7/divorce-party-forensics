@@ -573,8 +573,8 @@ export const decisions: Decision[] = [
       "The independent analysis agreed on distribution and tested a third treatment I had not considered: recognising " +
       "a 110,000 receivable from the founder. It rejected it because there is no loan agreement, no repayment term and " +
       "the founder has departed, so recognising an asset would be unsupportable - and it showed that if the receivable " +
-      "were recognised and then fully provided against, closing equity would be an identical 132,000 but reported " +
-      "profit would fall to a loss of 38,000. It also noted that the label changed from 'customer research' to " +
+      "were recognised and then fully provided against, closing equity would be an identical 134,000 but reported " +
+      "profit would fall to a loss of 36,000 on the certified basis. It also noted that the label changed from 'customer research' to " +
       "'marketing' to 'bonus' in nine minutes while the underlying transaction never changed at all.",
     studentReasoning:
       "There are three candidate treatments and I tested all three. Marketing fails because no customer meeting " +
@@ -1211,7 +1211,7 @@ export const decisions: Decision[] = [
       "date by someone who physically walked the warehouse, and because the consumption figure is produced by a system " +
       "that the same page admits was not updated - it impeaches itself. The decisive corroboration is arithmetic: " +
       "79,000 plus 42,000 is exactly 121,000, so my closing figure is built from two counted lines rather than from a " +
-      "residual. Under the alternative, inventory is 112,000 and profit is 63,000 instead of 72,000. That whole 9,000 " +
+      "residual. Under the alternative, inventory is 112,000 and profit is 65,000 instead of 74,000. That whole 9,000 " +
       "is disclosed in uncertainty U1 with a recommendation to recount against the purchase ledger, because the " +
       "honest position is that this number has a known error bar, not that it is certain.",
     statementEffect: { profit: -22000, cash: 0, assets: -22000, liabilities: 0, equity: -22000 },

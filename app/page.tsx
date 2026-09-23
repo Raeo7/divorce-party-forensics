@@ -89,8 +89,9 @@ export default function Home() {
             Case DPI-HT-01 · Divorce Party International Ltd. · {reportingDate} · {currency}
           </p>
           <h1>
-            The accounts said <span className="struck">312,000</span>. The bank said{" "}
-            <em>72,000</em>.
+            The accounts said{" "}
+            <span className="struck">{fmt(boardRecommendation.claimedProfit)}</span>. The bank
+            said <em>{fmt(boardRecommendation.correctedProfit)}</em>.
           </h1>
           <p className="lede">
             A forensic reconstruction of the Profit and Loss Statement, Cash Flow Statement and
@@ -163,7 +164,7 @@ export default function Home() {
           <SectionHead
             id="bridge"
             num="01"
-            title="Where 240,000 of profit went"
+            title={`Where ${fmt(boardRecommendation.profitOverstatement)} of profit went`}
             note="Revenue is real. The reporting was not. This is the whole case in one walk: from the figure management put in the takeover deck to the figure the evidence supports."
           />
           <div className="card">
@@ -318,7 +319,7 @@ export default function Home() {
               current-period activity, which can only have discharged a balance brought forward.
               Interest payable of nil comes from the interest roll-forward against the bank-confirmed
               closing accrual of 2,000. Opening equity of 170,000 is then a residual — and the fact
-              that it later reconciles exactly to closing equity of 132,000 is a genuine cross-check,
+              that it later reconciles exactly to closing equity of 134,000 is a genuine cross-check,
               not a restatement.
             </p>
             <div className="tbl-scroll">
@@ -550,7 +551,7 @@ export default function Home() {
             id="uncertainty"
             num="08"
             title="Material uncertainty"
-            note="Six areas where the evidence does not settle the answer. Each shows the range, where the certified figure sits inside it, the profit effect of moving within it, and what would resolve it. Together they bound net profit between roughly 58,000 and 86,000. None of it gets near 312,000."
+            note="Six areas where the evidence does not settle the answer. Each shows the range, where the certified figure sits inside it, the profit effect of moving within it, and what would resolve it. Setting aside U3, where the whole 88,000 of aged receivables would have to fail, they bound net profit between roughly 50,000 and 85,000. None of it gets near 312,000."
           />
           {uncertainties.map((u) => (
             <div className="card" key={u.id}>

@@ -354,7 +354,7 @@ export const reconciliations: Reconciliation[] = [
     rightValue: 540000,
     passes: true,
     detail:
-      "60,000 + 168,000 + 121,000 + 191,000 = 540,000 against 408,000 of liabilities plus 132,000 of equity.",
+      "60,000 + 168,000 + 121,000 + 191,000 = 540,000 against 406,000 of liabilities plus 134,000 of equity.",
   },
   {
     id: "R2",

@@ -19,29 +19,36 @@ export const agentProtocol = {
     "Independent reconstruction from the twelve original case files, with a required register of every evidential " +
     "conflict and a quantified alternative for each.",
   convergence:
-    "The two analyses agree on every certified figure in the three statements: revenue 960,000, net profit 72,000, " +
-    "closing cash 60,000, total assets 540,000, total liabilities 408,000, closing equity 132,000 and opening equity " +
-    "170,000. Both independently derived the two opening balances that appear nowhere in the data room - trade " +
-    "payables of 45,000 and interest payable of nil - and both resolved the inventory conflict in favour of the " +
-    "physical count. That convergence from separate starting points is the strongest evidence that the reconstruction " +
-    "is reproducible, which is the standard the assignment sets.",
+    "The two analyses agreed with each other on every figure in the three statements: revenue 960,000, net profit " +
+    "72,000, closing cash 60,000, total assets 540,000, total liabilities 408,000, closing equity 132,000 and " +
+    "opening equity 170,000. Both independently derived the two opening balances that appear nowhere in the data " +
+    "room - trade payables of 45,000 and interest payable of nil - and both resolved the inventory conflict in " +
+    "favour of the physical count. That convergence from separate starting points is the strongest evidence that " +
+    "the reconstruction is reproducible, which is the standard the assignment sets. " +
+    "The certified position now departs from both of them on five lines, and that is deliberate. On review of " +
+    "D058 and D072 I removed the 2,000 disposal provision, because a negative net realisable value floors an " +
+    "asset at nil but does not create a liability without a present legal or constructive obligation, and none " +
+    "existed at 31 August. Both agents had provided for it. Certified net profit is therefore 74,000 rather than " +
+    "the 72,000 both analyses reached, with operating expenses 398,000, operating profit 86,000, total " +
+    "liabilities 406,000 and closing equity 134,000. Agreement between two AI analyses is evidence of " +
+    "reproducibility, not of correctness.",
 };
 
 export const agentComparison: AgentFigure[] = [
   { metric: "Revenue", agent1: "960,000", agent2: "960,000", certified: "960,000", agreed: true },
   { metric: "Cost of sales (presentation)", agent1: "476,000", agent2: "508,000", certified: "476,000", agreed: false },
   { metric: "Gross profit / margin", agent1: "484,000 / 50.4%", agent2: "452,000 / 47.1%", certified: "484,000 / 50.4%", agreed: false },
-  { metric: "Total operating expenses", agent1: "400,000", agent2: "368,000", certified: "400,000", agreed: false },
-  { metric: "Operating profit", agent1: "84,000", agent2: "84,000", certified: "84,000", agreed: true },
-  { metric: "Net profit", agent1: "72,000", agent2: "72,000", certified: "72,000", agreed: true },
+  { metric: "Total operating expenses", agent1: "400,000", agent2: "368,000", certified: "398,000", agreed: false },
+  { metric: "Operating profit", agent1: "84,000", agent2: "84,000", certified: "86,000", agreed: true },
+  { metric: "Net profit", agent1: "72,000", agent2: "72,000", certified: "74,000", agreed: true },
   { metric: "Closing cash", agent1: "60,000", agent2: "60,000", certified: "60,000", agreed: true },
   { metric: "Net receivables", agent1: "168,000", agent2: "168,000", certified: "168,000", agreed: true },
   { metric: "Closing inventory", agent1: "121,000", agent2: "121,000", certified: "121,000", agreed: true },
   { metric: "Materials consumed", agent1: "396,000", agent2: "396,000", certified: "396,000", agreed: true },
   { metric: "PPE net book value", agent1: "191,000", agent2: "191,000", certified: "191,000", agreed: true },
   { metric: "Total assets", agent1: "540,000", agent2: "540,000", certified: "540,000", agreed: true },
-  { metric: "Total liabilities", agent1: "408,000", agent2: "408,000", certified: "408,000", agreed: true },
-  { metric: "Closing equity", agent1: "132,000", agent2: "132,000", certified: "132,000", agreed: true },
+  { metric: "Total liabilities", agent1: "408,000", agent2: "408,000", certified: "406,000", agreed: true },
+  { metric: "Closing equity", agent1: "132,000", agent2: "132,000", certified: "134,000", agreed: true },
   { metric: "Opening equity (derived)", agent1: "170,000", agent2: "170,000", certified: "170,000", agreed: true },
   { metric: "Opening trade payables (derived)", agent1: "45,000", agent2: "45,000", certified: "45,000", agreed: true },
   { metric: "Owner distributions", agent1: "110,000", agent2: "110,000", certified: "110,000", agreed: true },
@@ -83,7 +90,7 @@ export const agentDisagreements: AgentDisagreement[] = [
     agent1Position: "Did not split the balance sheet between current and non-current.",
     agent2Position:
       "Present the 131,000 loan as non-current, while flagging that no repayment schedule was supplied and that if " +
-      "the whole balance were current, working capital swings from a surplus of 72,000 to a deficit of 59,000.",
+      "the whole balance were current, working capital swings from a surplus of 74,000 to a deficit of 57,000.",
     resolution:
       "Adopted Agent 2's presentation and its warning. The split is unevidenced, so the balance sheet shows the loan " +
       "as non-current and the working-capital note states both outcomes. Obtaining the repayment schedule from the " +
