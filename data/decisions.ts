@@ -362,7 +362,8 @@ export const decisions: Decision[] = [
       "Basement 'premium' stock with a carrying value of EUR 22,000, counted as physically present by Marta on " +
       "31 August but wet and unsaleable, sitting under a leaking pipe. An independent post-takeover assessment confirms " +
       "it is not saleable and that disposal will cost about EUR 2,000, which is not included in the 22,000. Written down " +
-      "to nil with a EUR 2,000 disposal provision. The founder's position that 'if it still exists, it is inventory' is " +
+      "to nil. The 2,000 is disclosed as expected future expenditure, not provided: no disposal contract, statute or " +
+      "lease term obliged the company to clear the goods at 31 August. The founder's position that 'if it still exists, it is inventory' is " +
       "rejected. See D058 and D072.",
     evidence: ["E05:Basement premium stock", "E05:handwritten leaking pipe note", "E11:Independent stock assessment", "E10:16:05-16:06"],
     confidence: "high",
@@ -806,29 +807,34 @@ export const decisions: Decision[] = [
     reviewTier: "material_judgment",
     question: "Classify Damaged stock.",
     answer:
-      "Write the EUR 22,000 basement stock down to nil and recognise a EUR 2,000 provision for disposal. Total charge " +
-      "EUR 24,000.",
+      "Write the EUR 22,000 basement stock down to nil. Total charge EUR 22,000. The EUR 2,000 quoted to remove it is " +
+      "NOT provided - it is disclosed as expected future expenditure, because no present obligation to dispose existed " +
+      "at 31 August.",
     evidence: ["E05:Basement premium stock 22,000, wet, cannot be sold", "E05:disposal quote 2,000 not in carrying value", "E11:Independent stock assessment", "E10:16:06"],
     confidence: "high",
     aiProposal:
       "Write off 22,000. The stock is physically present but unsaleable, and physical existence does not guarantee " +
       "financial value.",
     independentChallenge:
-      "The independent analysis reached the same 22,000 write-off and then went further on the disposal cost. It " +
-      "argued that inventory is carried at the lower of cost and net realisable value, that net realisable value here " +
-      "is the selling price of nil less costs to sell of 2,000, and that a negative net realisable value cannot be " +
-      "shown as a nil asset without also showing the 2,000 obligation. It noted the counter-argument that the quote " +
-      "arrived in September and no disposal contract yet exists.",
+      "The independent analysis reached the same 22,000 write-off and then argued for provisioning the 2,000 as well, on " +
+      "the basis that net realisable value is selling price less costs to sell and is therefore negative. It noted the " +
+      "counter-argument that the quote arrived in September and no disposal contract yet exists. On review that " +
+      "counter-argument is the stronger one, and I did not follow the recommendation.",
     studentReasoning:
-      "I changed my answer here, and the change is the interesting part. My first pass stopped at the 22,000 write-off " +
-      "because that is the carrying value and writing it to nil feels like the end of the problem. It is not. The " +
-      "company is not merely holding something worth nothing; it is holding something that will cost 2,000 to be rid " +
-      "of, and the warehouse file goes out of its way to say the 2,000 is not inside the 22,000. Net realisable value " +
-      "is nil less 2,000 of costs to sell, which is negative, and an asset cannot be carried below zero - the shortfall " +
-      "is a liability. The damage happened before 31 August under a leaking pipe, so the obligation to clear it arises " +
-      "from a past event. I record the contrary view in uncertainty U5: if the board treats the 2,000 as a September " +
-      "cost instead, profit is 74,000 rather than 72,000.",
-    statementEffect: { profit: -24000, cash: 0, assets: -22000, liabilities: 2000, equity: -24000 },
+      "The 22,000 write-off is not in doubt: three sources agree the stock is unsaleable, and physical existence is not " +
+      "recoverable value. The disposal cost is where I went wrong first time and have now corrected. I had reasoned that " +
+      "net realisable value is nil less 2,000 of costs to sell, therefore negative, therefore the shortfall is a " +
+      "liability. That conflates two different rules. Measuring inventory at the lower of cost and net realisable value " +
+      "floors the ASSET at nil; it does not create a LIABILITY. A liability requires a present obligation, legal or " +
+      "constructive, arising from a past event. I tested for one and found none: there is no disposal contract at " +
+      "31 August - the quote itself is dated 3 to 5 September - no statute or lease term requiring clearance is in " +
+      "evidence, and there is no past practice or published policy that would create a valid expectation in anyone " +
+      "else. So the company has an intention to spend 2,000, not an obligation. Intentions are disclosed, not provided. " +
+      "This also restores consistency with D071, where I declined to book a bad-debt allowance precisely because it had " +
+      "no evidential basis; provisioning here would have been the same error in the opposite direction. If the warehouse " +
+      "lease or a regulation does oblige clearance, the provision returns and profit falls from 74,000 to 72,000 - that " +
+      "alternative is quantified in uncertainty U5.",
+    statementEffect: { profit: -22000, cash: 0, assets: -22000, liabilities: 0, equity: -22000 },
     changedFromAI: true,
   },
   {
@@ -1097,25 +1103,31 @@ export const decisions: Decision[] = [
     reviewTier: "material_judgment",
     question: "Estimate Damaged inventory write-off and document the basis.",
     answer:
-      "Write-off of EUR 22,000 to nil plus a EUR 2,000 disposal provision. Total charge EUR 24,000. Measurement half " +
-      "of D058.",
+      "Write-off of EUR 22,000 to nil. The EUR 2,000 disposal quote is disclosed as expected future expenditure, not " +
+      "provided. Measurement half of D058.",
     evidence: ["E05:22,000 carrying value, cannot be sold", "E05:disposal quote 2,000, not in the carrying value", "E11:Independent stock assessment"],
     confidence: "high",
     aiProposal: "Write off the full 22,000 carrying value, since the stock has no saleable value.",
     independentChallenge:
-      "The independent analysis confirmed the 22,000 and pressed on measurement rather than principle: net realisable " +
-      "value is selling price less costs to sell, which here is nil less 2,000, so the correct measurement is negative " +
-      "and cannot be expressed by writing the asset to zero alone. It recommended the 2,000 be carried as a liability, " +
-      "while acknowledging the alternative of treating it as a September cost.",
+      "The independent analysis confirmed the 22,000 and argued the 2,000 should also be carried as a liability, on the " +
+      "grounds that net realisable value is selling price less costs to sell and is therefore negative. It did flag the " +
+      "counter-argument - the quote arrived in September and no disposal contract exists. I have certified against its " +
+      "recommendation: the counter-argument is decisive, because a negative measurement of an asset is not the same " +
+      "thing as an obligation.",
     studentReasoning:
-      "The amount is not in dispute - three separate sources say 22,000 and that it is unsaleable. The judgment is " +
-      "whether nil is actually the right answer, and it is not quite. Writing the stock to zero says the company holds " +
-      "something worthless; the truth is it holds something that will cost 2,000 to remove, and the warehouse file " +
-      "deliberately tells us the 2,000 is outside the 22,000. That is a signpost, not a detail. Net realisable value is " +
-      "negative, the asset floors at nil and the remaining 2,000 becomes a provision. The write-off is also a control " +
-      "finding, not just a number: stock sat under a leaking pipe long enough to destroy 22,000 of goods and nobody " +
-      "acted, which is why D096 recommends disposal and D097 recommends investigating the override.",
-    statementEffect: { profit: -24000, cash: 0, assets: -22000, liabilities: 2000, equity: -24000 },
+      "The 22,000 is not in dispute: three separate sources say the stock is unsaleable. The disposal cost is the " +
+      "judgment, and I have corrected it. My earlier answer provided 2,000 on the reasoning that net realisable value " +
+      "was negative. That was wrong in principle. The lower-of-cost-and-NRV rule measures an asset and floors it at " +
+      "nil; recognising a liability is a separate test requiring a present obligation - legal or constructive - from a " +
+      "past event. Owning goods that are worthless is not an obligation to spend money removing them. I looked for an " +
+      "obligation and none exists at the reporting date: no disposal contract was signed, the quote is dated 3 to 5 " +
+      "September, no clearance requirement in a lease or regulation appears anywhere in the data room, and there is no " +
+      "past practice or announcement creating an expectation in a third party. So the 2,000 is disclosed as expected " +
+      "future expenditure and charged when incurred. Certified profit is therefore 74,000, not 72,000. The no-provision " +
+      "and provision positions are both quantified in uncertainty U5. The write-off remains a control finding as well " +
+      "as a number: stock sat under a leaking pipe long enough to destroy 22,000 of goods and nobody acted, which is " +
+      "why D096 recommends disposal and D097 recommends investigating the override.",
+    statementEffect: { profit: -22000, cash: 0, assets: -22000, liabilities: 0, equity: -22000 },
     changedFromAI: true,
   },
   {
@@ -1351,9 +1363,9 @@ export const decisions: Decision[] = [
     reviewTier: "operational",
     question: "Estimate Net profit and document the basis.",
     answer:
-      "EUR 72,000. Revenue 960,000 less cost of sales 476,000 gives gross profit of 484,000; less operating expenses of " +
-      "400,000 gives operating profit of 84,000; less interest of 12,000 gives 72,000. Management claimed 312,000, an " +
-      "overstatement of 240,000.",
+      "EUR 74,000. Revenue 960,000 less cost of sales 476,000 gives gross profit of 484,000; less operating expenses of " +
+      "398,000 gives operating profit of 86,000; less interest of 12,000 gives 74,000. Management claimed 312,000, an " +
+      "overstatement of 238,000.",
     evidence: [
       "E02:complete bank export",
       "E04:signed acceptances",
@@ -1412,9 +1424,9 @@ export const decisions: Decision[] = [
       "derived independently from the supplier roll-forward yet still lands the equity reconciliation exactly on " +
       "132,000, which is a real cross-check rather than a restatement. I record the balance-sheet effects as not " +
       "applicable rather than guessing them, because management never produced a balance sheet that balances - their " +
-      "own file says cash includes promises and payroll was never calculated. Profit falls by 240,000 and cash by " +
+      "own file says cash includes promises and payroll was never calculated. Profit falls by 238,000 and cash by " +
       "126,000.",
-    statementEffect: { profit: -240000, cash: -126000, assets: null, liabilities: null, equity: null },
+    statementEffect: { profit: -238000, cash: -126000, assets: null, liabilities: null, equity: null },
     changedFromAI: false,
   },
   {
@@ -1470,7 +1482,9 @@ export const decisions: Decision[] = [
     reviewTier: "operational",
     question: "Dispose of damaged stock",
     answer:
-      "Yes. Accept the EUR 2,000 disposal quote and clear the basement. The goods have no saleable value, they are " +
+      "Yes. Accept the EUR 2,000 disposal quote and clear the basement. The cost is disclosed rather than provided at " +
+      "31 August, because no obligation to dispose existed then; accepting the quote is what creates it, and the 2,000 " +
+      "will be charged in the period the board commits. The goods have no saleable value, they are " +
       "already written off, and selling water-damaged gift boxes would create a returns and reputation problem worth " +
       "more than 22,000. Fix the leaking pipe at the same time.",
     evidence: ["E05:basement stock, leaking pipe note", "E11:Independent stock assessment, disposal 2,000"],
@@ -1511,7 +1525,7 @@ export const decisions: Decision[] = [
       "Yes, continue. Revenue of EUR 960,000 is real and every euro is supported by a signed acceptance, a delivery " +
       "date or a platform settlement. Gross profit is EUR 484,000, a 50.4 per cent margin after charging the staff who " +
       "actually deliver the events, and operating cash flow was positive at EUR 139,000. The company did not lose money " +
-      "on what it sold; it lost 240,000 of reported profit to bad accounting and 110,000 of cash to the founder. Both " +
+      "on what it sold; it lost 238,000 of reported profit to bad accounting and 110,000 of cash to the founder. Both " +
       "are fixable and neither is a trading problem.",
     evidence: [
       "E04:signed acceptances",
@@ -1529,7 +1543,8 @@ export const decisions: Decision[] = [
     question: "Use claimed management profit for earn-out",
     answer:
       "No. Do not use the claimed EUR 312,000 for any earn-out, valuation or covenant calculation. The certified basis " +
-      "is EUR 72,000.",
+      "is EUR 74,000, and the walk from one to the other is the reconciled bridge in section 01 of the report, not an " +
+      "approximate list of errors.",
     evidence: [
       "E01:Management profit 312,000 'Used in takeover deck'",
       "E10:08:04-08:07",
@@ -1538,23 +1553,33 @@ export const decisions: Decision[] = [
     confidence: "high",
     aiProposal:
       "Reject the 312,000. It includes 90,000 of undelivered deposits and 50,000 of borrowing as income and omits " +
-      "depreciation, bad debt, the stock write-off and the legal provision.",
+      "depreciation, bad debt, the stock write-off and the legal provision. The proposal also listed the owner's " +
+      "110,000 as if it widened the gap, which is the wrong sign.",
     independentChallenge:
       "The independent analysis agreed on rejection and made the point that the number is not merely wrong but " +
       "unusable. It is not an error that can be adjusted to, because the workbook's own notes describe its inputs as " +
       "'approximate', say 'some items omitted' and admit that formulas were replaced with hard values. It recommended " +
       "the board also ask what the 312,000 was used for, since the file states it went into the takeover deck.",
     studentReasoning:
-      "The gap is 240,000, or 77 per cent of what was claimed, and it decomposes cleanly: 90,000 of September deposits " +
-      "booked as sales, 50,000 of bank borrowing booked as income, 110,000 of personal spending sitting in profit " +
-      "rather than distributions, less the charges that were never booked - depreciation 24,000, bad debt 18,000, dead " +
-      "stock 24,000 and the legal provision 25,000 - partly offset by the equipment that was wrongly expensed. Two " +
-      "separate things are wrong with the 312,000 and only one is arithmetic. The other is that it was constructed on " +
-      "purpose: the message traffic shows the deposits and the loan being relabelled deliberately and the file says the " +
-      "number went into the takeover deck. An earn-out priced on a profit figure the seller engineered transfers the " +
-      "whole error to the buyer. Certified profit is 72,000 and I would put the 88,000 of aged receivables in front of " +
-      "the board before anyone prices even that.",
-    statementEffect: { profit: -240000, cash: -126000, assets: null, liabilities: null, equity: null },
+      "The gap is 238,000, and the bridge that actually reconciles runs: 312,000 claimed, less 90,000 of September " +
+      "deposits that were not revenue, less 50,000 of bank borrowing that was not income, less 24,000 because " +
+      "management's 'materials and wages' of 620,000 understates the reconstructed 644,000, PLUS 27,000 because their " +
+      "'operating costs' of 168,000 overstates the 141,000 of actual cash overhead, less 24,000 of depreciation never " +
+      "booked, less 22,000 of dead stock, less 18,000 of bad debt and less 25,000 of legal provision - giving operating " +
+      "profit of 86,000 - then less 12,000 of interest, giving 74,000. Every step ties. " +
+      "I want to be explicit about one sign, because my earlier explanation had it wrong. Reclassifying the founder's " +
+      "110,000 out of expenses and into distributions does not deepen the gap - it RAISES profit by 110,000. It does " +
+      "not appear as a standalone line in the bridge because management's two cost aggregates are marked 'Approximate' " +
+      "and 'Some items omitted' in their own file, so their composition cannot be traced; the reclassification is " +
+      "absorbed inside the two aggregate-difference lines above. Its effect on total equity is nil either way, which is " +
+      "the point: it moves 110,000 between profit and distributions without changing net assets, and an earn-out priced " +
+      "on profit is exactly what that movement distorts. " +
+      "Two separate things are wrong with the 312,000 and only one is arithmetic. The other is that it was constructed " +
+      "on purpose: the message traffic shows the deposits and the loan being relabelled deliberately, and the file says " +
+      "the number went into the takeover deck. An earn-out priced on a profit figure the seller engineered transfers " +
+      "the whole error to the buyer. Certified profit is 74,000, and I would put the 88,000 of aged receivables in " +
+      "front of the board before anyone prices even that.",
+    statementEffect: { profit: -238000, cash: -126000, assets: null, liabilities: null, equity: null },
     changedFromAI: false,
   },
 ];
