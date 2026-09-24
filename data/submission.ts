@@ -8,6 +8,7 @@ import {
   directMethodCheck,
   openingBalanceSheet,
   profitAndLoss,
+  profitBridge,
   reconciliations,
   schedules,
   uncertainties,
@@ -68,6 +69,13 @@ export const buildSubmission = () => ({
       },
     ]),
   ),
+  profitBridge: profitBridge.map((s) => ({
+    step: s.label,
+    delta: s.delta,
+    running: s.running,
+    kind: s.kind,
+    basis: s.why,
+  })),
   statements: {
     openingBalanceSheet: toStatement(openingBalanceSheet),
     profitAndLoss: toStatement(profitAndLoss),
