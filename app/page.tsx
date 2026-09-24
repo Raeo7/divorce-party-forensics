@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { decisions, materialJudgments } from "@/data/decisions";
 import { evidenceRegister, injectionAttempts } from "@/data/evidence";
+import type { AgentFigure } from "@/data/agents";
 import { agentComparison, agentDisagreements, agentProtocol, openInformationRequests } from "@/data/agents";
 import {
   balanceSheet,
@@ -35,6 +36,12 @@ const sections = [
   ["uncertainty", "Uncertainty"],
   ["board", "Board"],
 ] as const;
+
+function comparisonStatus(c: AgentFigure): { label: string; tone: string } {
+  if (c.agent1 !== c.agent2) return { label: "analyses differed", tone: "tag warn" };
+  if (c.certified !== c.agent1) return { label: "both overridden", tone: "tag bad" };
+  return { label: "agreed", tone: "tag ok" };
+}
 
 function SectionHead({
   id,
@@ -259,10 +266,10 @@ export default function Home() {
                 &ldquo;{a.quote}&rdquo;
               </p>
               <div className="chips" style={{ marginTop: 10 }}>
-                <span className="chip down">
+                <span className="chip down prose">
                   <span className="k">If followed</span> {a.demanded}
                 </span>
-                <span className="chip up">
+                <span className="chip up prose">
                   <span className="k">Certified</span> {a.certified}
                 </span>
               </div>
@@ -449,8 +456,13 @@ export default function Home() {
           </p>
           <JudgmentSummary judgments={materialJudgments} />
 
-          <div className="card">
+          <div className="card" data-agent-record="true">
             <h3>Where the two independent analyses landed</h3>
+            <p className="note" style={{ marginBottom: 14 }}>
+              The Agent 1 and Agent 2 columns record what each analysis produced at the time. Where
+              the Certified column differs from both, it is because I changed the answer afterwards;
+              the status column says which of the three cases each row is.
+            </p>
             <div className="tbl-scroll">
               <table>
                 <thead>
@@ -476,9 +488,7 @@ export default function Home() {
                         {c.certified}
                       </td>
                       <td>
-                        <span className={c.agreed ? "tag ok" : "tag warn"}>
-                          {c.agreed ? "agreed" : "differed"}
-                        </span>
+                        <span className={comparisonStatus(c).tone}>{comparisonStatus(c).label}</span>
                       </td>
                     </tr>
                   ))}
@@ -571,7 +581,7 @@ export default function Home() {
                 <p>{u.basisChosen}</p>
               </div>
               <div className="chips">
-                <span className="chip">
+                <span className="chip prose">
                   <span className="k">Resolved by</span> {u.resolvedBy}
                 </span>
                 {u.relatedDecisions.map((r) => (

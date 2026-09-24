@@ -34,6 +34,14 @@ export default function Review() {
   const netProfit = profitAndLoss.find((l) => l.level === "total")?.value ?? 0;
   const totalAssets = balanceSheet.find((l) => l.label === "Total assets")?.value ?? 0;
 
+  const adverse = (u: (typeof uncertainties)[number]) => Math.min(u.profitEffectLow, u.profitEffectHigh);
+  const favourable = (u: (typeof uncertainties)[number]) => Math.max(u.profitEffectLow, u.profitEffectHigh);
+  const sum = (ns: number[]) => ns.reduce((a, b) => a + b, 0);
+  const bestCase = netProfit + sum(uncertainties.map(favourable));
+  const worstCase = netProfit + sum(uncertainties.map(adverse));
+  const worstCaseExU3 = netProfit + sum(uncertainties.filter((u) => u.id !== "U3").map(adverse));
+  const u3Exposure = Math.abs(adverse(uncertainties.find((u) => u.id === "U3")!));
+
   return (
     <>
       <div className="topbar">
@@ -113,9 +121,14 @@ export default function Review() {
               <span className="tag">{agentDisagreements.length}</span>
             </div>
             <p className="note" style={{ marginBottom: 14 }}>
-              All three are presentation differences. The two independent analyses agreed on every
-              certified number in the statements, including net profit of 74,000, total assets of
-              540,000 and the derived opening equity of 170,000.
+              All three are presentation differences, and none moves profit. The two independent
+              analyses agreed with each other on every figure in the statements - total assets of
+              540,000, the derived opening equity of 170,000 and net profit of 72,000. Certified net
+              profit is 74,000, because on review of D058 and D072 I removed a disposal provision
+              that both of them had booked. That single change moves five lines - operating
+              expenses, operating profit, net profit, total liabilities and closing equity - and it
+              is the only place the certified position departs from both analyses. Both decisions
+              are listed as overrides below.
             </p>
             <div className="tbl-scroll">
               <table>
@@ -261,8 +274,12 @@ export default function Review() {
             <div className="sec-num">03</div>
             <h2>Unresolved uncertainty</h2>
             <p className="sec-note">
-              Combined, these bound certified net profit between roughly 58,000 and 86,000 against a
-              claimed 312,000.
+              Driven to their extremes together, these bound certified net profit between{" "}
+              {worstCase < 0 ? `a loss of ${fmt(-worstCase)}` : fmt(worstCase)} and a profit of{" "}
+              {fmt(bestCase)}, against a claimed{" "}
+              {fmt(boardRecommendation.claimedProfit)}. The downside is dominated by U3: it assumes
+              the whole {fmt(u3Exposure)} of aged Freedom and Phoenix balances fails, which no evidence
+              currently supports. Excluding U3, the band is {fmt(worstCaseExU3)} to {fmt(bestCase)}.
             </p>
           </div>
           {uncertainties.map((u) => (
@@ -276,7 +293,7 @@ export default function Review() {
               </div>
               <RangeBar low={u.low} best={u.best} high={u.high} />
               <div className="chips" style={{ marginTop: 14 }}>
-                <span className="chip">
+                <span className="chip prose">
                   <span className="k">Resolved by</span> {u.resolvedBy}
                 </span>
                 {u.relatedDecisions.map((r) => (
@@ -346,7 +363,7 @@ function shortWhy(id: string): string {
     D078: "Concluding nil from the absence of evidence.",
     D083: "Inherits the estimation uncertainty in the 24,000 depreciation charge.",
     D086: "Inherits the 9,000 inventory variance.",
-    D089: "Aggregates every estimation uncertainty in the case; range roughly 58,000 to 86,000.",
+    D089: "Aggregates every estimation uncertainty in the case; see the bands in section 03.",
     D098: "Supplier appetite for renegotiation is not evidenced; the exposure and concentration are.",
   };
   return map[id] ?? "Judgment recorded below full confidence; see the decision record.";
