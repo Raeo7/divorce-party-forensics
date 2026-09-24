@@ -81,7 +81,9 @@ export const agentDisagreements: AgentDisagreement[] = [
       "show what it recurringly costs to deliver a sale. A flood under a leaking pipe and an emergency breakdown are " +
       "abnormal and are more useful shown separately. Agent 2's presentation is equally acceptable under normal " +
       "reporting practice and both margins are disclosed here so a reader can use whichever they prefer.",
-    profitEffect: "None. Both presentations give operating profit of 84,000 and net profit of 72,000.",
+    profitEffect:
+      "None. The choice moves charges across the gross profit line only, so both presentations give the same " +
+      "operating profit and the same net profit - certified 86,000 and 74,000.",
     relatedDecisions: ["D045", "D048", "D049", "D058", "D072"],
   },
   {

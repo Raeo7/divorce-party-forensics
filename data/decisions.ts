@@ -667,7 +667,7 @@ export const decisions: Decision[] = [
       "nothing looks wrong at the bottom of the page. It then took a different view on presentation from mine, " +
       "placing the 22,000 inventory write-down and the 10,000 machine repair inside cost of sales as well, which " +
       "gives cost of sales of 508,000 and a gross margin of 47.1 per cent rather than my 50.4 per cent. Net profit is " +
-      "72,000 on both presentations.",
+      "identical on both presentations, since the choice only moves charges across the gross profit line.",
     studentReasoning:
       "This decision does not change profit by a single euro, and I want to say that plainly rather than hide it. It " +
       "moves 80,000 across the gross profit line, taking gross margin from 58.8 per cent to 50.4 per cent. That matters " +
@@ -678,7 +678,8 @@ export const decisions: Decision[] = [
       "differ on where the 22,000 write-down and the 10,000 repair sit, and I kept them below gross profit on purpose: " +
       "a flood under a leaking pipe and an emergency machine breakdown are not the recurring cost of selling a gift " +
       "box, and the board is about to decide whether to keep trading, which needs a margin that shows what normal " +
-      "delivery costs. Both presentations reach 72,000, so nothing turns on it except what the board reads as normal.",
+      "delivery costs. Both presentations reach the certified 74,000, so nothing turns on it except what the board " +
+      "reads as normal.",
     statementEffect: { profit: 0, cash: 0, assets: 0, liabilities: 0, equity: 0 },
     changedFromAI: false,
     agentsDisagreed: true,
@@ -1422,7 +1423,7 @@ export const decisions: Decision[] = [
       "bank confirmation, payables to supplier confirmations, stock to a physical count, the legal provision to " +
       "counsel, the bad debt to a liquidator. The seven required checks all pass, and opening equity of 170,000 was " +
       "derived independently from the supplier roll-forward yet still lands the equity reconciliation exactly on " +
-      "132,000, which is a real cross-check rather than a restatement. I record the balance-sheet effects as not " +
+      "134,000, which is a real cross-check rather than a restatement. I record the balance-sheet effects as not " +
       "applicable rather than guessing them, because management never produced a balance sheet that balances - their " +
       "own file says cash includes promises and payroll was never calculated. Profit falls by 238,000 and cash by " +
       "126,000.",
@@ -1436,7 +1437,8 @@ export const decisions: Decision[] = [
     question: "Freeze owner-card access",
     answer:
       "Yes, today. EUR 110,000 left the company on the founder's card in eight months with no approval, including " +
-      "EUR 70,000 for a villa in his personal name. That is 183 per cent of the certified profit for the period. " +
+      "EUR 70,000 for a villa in his personal name. That is 149 per cent of the certified profit for the period and " +
+      "183 per cent of the cash left in the bank. " +
       "Revoke the card, revoke payment authority and obtain the full transaction detail.",
     evidence: ["E02:VILLA", "E02:OWNERCARD", "E09:owner card items", "E07:no employment approval"],
     confidence: "high",

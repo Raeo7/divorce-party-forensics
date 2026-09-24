@@ -118,7 +118,7 @@ export const schedules: Schedule[] = [
       { label: "Insurance", value: 0, note: "No insurance payment appears in the bank export or any schedule" },
     ],
     proof:
-      "The five cash overhead lines (48 + 55 + 16 + 12 + 10 = 141,000) agree line for line with the bank export. The remaining 257,000 are non-cash charges and accruals supported by the independent depreciation schedule, the liquidator notice, the stock assessment and counsel's opinion. No disposal provision is included - see D072.",
+      "The five cash overhead lines (48,000 + 55,000 + 16,000 + 12,000 + 10,000 = 141,000) agree line for line with the bank export. The remaining 257,000 are non-cash charges and accruals supported by the independent depreciation schedule, the liquidator notice, the stock assessment and counsel's opinion. No disposal provision is included - see D072.",
   },
   {
     id: "S5",
